@@ -36,12 +36,23 @@ def shift_characters(word: str, shift: int) -> str:
     return shifted_word
 
 
-def pad_up_to(word, shift, n):
+def pad_up_to(word: str, shift: int, letters_number: int) -> str:
     """
-    >>> pad_up_to('abb', 5, 11)
+    Returns a string of n characters, starting with the lowercase version of word, continued by the
+    shifted variants of it as described above.
+
+        pad_up_to('abb', 5, 11), returns:
     ... 'abbfggkllpq'
     """
-    pass
+    letters_number = abs(letters_number)
+    iterate_number = round(letters_number / len(word))
+
+    # operates on the whole word
+    returned_string = ""
+    for iterate_block in range(iterate_number):
+        returned_string += shift_characters(word, iterate_block * shift)
+
+    return returned_string[:letters_number]
 
 
 def abc_mirror(word):
@@ -128,13 +139,14 @@ def generate_letters() -> tuple:
         letters.append(chr(ascii_number))
     return tuple(letters)
 
+
 # ------------------------------------------- main code -------------------------------------------
 
-ALPHABET= generate_letters()
+ALPHABET = generate_letters()
 ALPHABET_SIZE = len(ALPHABET)
 
 if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(shift_characters("abby", 5))
+    print(pad_up_to("abb", 5, 11))
