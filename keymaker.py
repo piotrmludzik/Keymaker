@@ -55,12 +55,28 @@ def pad_up_to(word: str, shift: int, letters_number: int) -> str:
     return returned_string[:letters_number]
 
 
-def abc_mirror(word):
+def abc_mirror(word: str) -> str:
     """
-    >>> abc_mirror('abcd')
-    ... 'zyxw'
+    Returns a string where each character (all lowercase) is "mirrored" to the other side of 'abc'.
+    A character is the mirror of another when its value distance from 'z' is the same as the
+    other's value distance from 'a'.
+
+        abc_mirror('abcd')
+        'zyxw'
     """
-    pass
+    ALPHABET_LEFT = ALPHABET[:ALPHABET_SIZE // 2]
+    ALPHABET_RIGHT = ALPHABET[ALPHABET_SIZE // 2:]
+
+    mirrored_word = ""
+    for letter in word:
+        if letter in ALPHABET_LEFT:
+            letter_index = ALPHABET_LEFT.index(letter)
+            mirrored_word += ALPHABET_RIGHT[len(ALPHABET_RIGHT) - letter_index - 1]
+        else:
+            letter_index = ALPHABET_RIGHT.index(letter)
+            mirrored_word += ALPHABET_LEFT[len(ALPHABET_LEFT) - letter_index - 1]
+
+    return mirrored_word
 
 
 def create_matrix(word1, word2):
@@ -149,4 +165,4 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(pad_up_to("abb", 5, 11))
+    print(abc_mirror("abcd"))
