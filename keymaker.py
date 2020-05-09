@@ -81,10 +81,19 @@ def abc_mirror(word: str) -> str:
 
 def create_matrix(word1, word2):
     """
-    >>> create_matrix('mamas', 'papas')
-    ... ['bpbph', 'mamas', 'bpbph', 'mamas', 'esesk']
+    Returns a list of strings where the nth row is word1 shifted by the value of the nth character
+    of word2.
+
+        create_matrix('mamas', 'papas')
+        ['bpbph', 'mamas', 'bpbph', 'mamas', 'esesk']
     """
-    pass
+    matrix = []
+    for letter in word2:
+        shift = ALPHABET.index(letter)
+        hashed_word = shift_characters(word1, shift)
+        matrix.append(hashed_word)
+
+    return matrix
 
 
 def zig_zag_concatenate(matrix):
@@ -165,4 +174,4 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(abc_mirror("abcd"))
+    print(create_matrix('mamas', 'papas'))
