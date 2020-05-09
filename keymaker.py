@@ -1,3 +1,16 @@
+# -------------------------------------------------------------------------------------------------
+#                                             Keymaker
+# -------------------------------------------------------------------------------------------------
+#
+#       Based on lower case letters, the program use a couple of smaller algorithms to hashed given
+# the word. The program refers to a custom hashing algorithm created by the legendary character
+# known as Keymaker from the Matrix.
+#
+# -------------------------------------------------------------------------------------------------
+
+
+# ---------------------------------------- main functions -----------------------------------------
+
 def shift_characters(word, shift):
     """
     >>> shift_characters('abby', 5)
@@ -83,6 +96,11 @@ def hash_it(word):
     key = reduce_to_fixed(halved, 6)
     return key
 
+
+# -------------------------------------- internal functions ---------------------------------------
+
+
+# ------------------------------------------- main code -------------------------------------------
 
 if __name__ == '__main__':
     name = input("Enter your name! ").lower()
