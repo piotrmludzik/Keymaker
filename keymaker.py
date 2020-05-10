@@ -147,7 +147,7 @@ def rotate_right(word: str, letters_number: int) -> str:
         rotate_right('abcdefgh', 3), returns:
         'fghabcde'
     """
-    return rotate_letters(word, letters_number)
+    return rotate_letters(word, abs(letters_number))
 
 
 def get_square_index_chars(word: str) -> str:
@@ -168,12 +168,25 @@ def get_square_index_chars(word: str) -> str:
     return returned_string
 
 
-def remove_odd_blocks(word, block_length):
+def remove_odd_blocks(word: str, block_length: int) -> str:
     """
-    >>> remove_odd_blocks('abcdefghijklm', 3)
-    ... 'abcghim'
+    The function breaks the input into blocks of the given length, removes every second block (i.e.
+    keeping blocks number 0, 2, 4, etc.), and returns the remaining blocks concatenated.
+
+        remove_odd_blocks('abcdefghijklm', 3), returns:
+        'abcghim'
     """
-    pass
+    block_length = abs(block_length)
+
+    blocks = []
+    for letter_index in range(0, len(word), block_length):
+        blocks.append(word[letter_index:letter_index+block_length])
+
+    processed_block = []
+    for block_index in range(0, len(blocks), 2):  # reads every second block
+        processed_block.append(blocks[block_index])
+
+    return "".join(processed_block)
 
 
 def reduce_to_fixed(word, n):
@@ -242,4 +255,4 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(get_square_index_chars("abcdefghijklm"))
+    print(remove_odd_blocks("abcdefghijklm", -3))
