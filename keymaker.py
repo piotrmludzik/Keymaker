@@ -79,7 +79,7 @@ def abc_mirror(word: str) -> str:
     return mirrored_word
 
 
-def create_matrix(word1, word2):
+def create_matrix(word1: str, word2: str) -> list:
     """
     Returns a list of strings where the nth row is word1 shifted by the value of the nth character
     of word2.
@@ -96,7 +96,7 @@ def create_matrix(word1, word2):
     return matrix
 
 
-def zig_zag_concatenate(matrix):
+def zig_zag_concatenate(matrix: list) -> str:
     """
     Returns a single string containing all the characters of the "matrix" like this:
 
@@ -114,7 +114,7 @@ def zig_zag_concatenate(matrix):
 
     from_left = True
     hashed_word = ""
-    word_index, letter_index = 0, 0
+    word_index = letter_index = 0
 
     while len(hashed_word) != letters_number:
         # firs word
@@ -139,12 +139,15 @@ def zig_zag_concatenate(matrix):
     return hashed_word
 
 
-def rotate_right(word, n):
+def rotate_right(word: str, letters_number: int) -> str:
     """
-    >>> rotate_right('abcdefgh', 3)
-    ... 'fghabcde'
+    Returns a string of the same length as word, only the characters are rotated by n positions
+    rightwards. The character "falling out" on the right side come back from the left side.
+
+        rotate_right('abcdefgh', 3), returns:
+        'fghabcde'
     """
-    pass
+    return rotate_letters(word, letters_number)
 
 
 def get_square_index_chars(word):
@@ -200,6 +203,22 @@ def generate_letters() -> tuple:
     return tuple(letters)
 
 
+def rotate_letters(word: str, letters_number: int, rotate_right: bool = True) -> str:
+    """
+    Returns a string of the same length as word, only the characters are rotated by n positions
+    in the indicated page (default to the right). The character "falling out" on the right side come back from the left side.
+
+        rotate_right('abcdefgh', 3), returns:
+        'fghabcde'
+    """
+    if rotate_right:
+        word = word[len(word) - letters_number:] + word[:len(word) - letters_number]
+    else:
+        word = word[letters_number:] + word[:letters_number]
+
+    return word
+
+
 # ------------------------------------------- main code -------------------------------------------
 
 ALPHABET = generate_letters()
@@ -209,4 +228,4 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl']))
+    print(rotate_right("abcdefgh", 3))
