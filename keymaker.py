@@ -26,7 +26,7 @@ def shift_characters(word: str, shift: int) -> str:
         shift_distance = letter_index + shift
 
         # values greater than the alphabet
-        while shift_distance > ALPHABET_SIZE:
+        while shift_distance >= ALPHABET_SIZE:
             shift_distance -= ALPHABET_SIZE
         # values smaller than the alphabet
         while shift_distance < 0:
@@ -44,7 +44,6 @@ def pad_up_to(word: str, shift: int, letters_number: int) -> str:
         pad_up_to('abb', 5, 11), returns:
     ... 'abbfggkllpq'
     """
-    letters_number = abs(letters_number)
     iterate_number = round(letters_number / len(word))
 
     # operates on the whole word
@@ -147,7 +146,7 @@ def rotate_right(word: str, letters_number: int) -> str:
         rotate_right('abcdefgh', 3), returns:
         'fghabcde'
     """
-    return rotate_letters(word, abs(letters_number))
+    return rotate_letters(word, letters_number)
 
 
 def get_square_index_chars(word: str) -> str:
@@ -160,7 +159,7 @@ def get_square_index_chars(word: str) -> str:
     returned_string = ""
     letter_index, square_number = 0, 0
 
-    while square_number <= len(word):
+    while square_number < len(word):
         returned_string += word[square_number]
         letter_index += 1
         square_number = letter_index * letter_index
@@ -176,8 +175,6 @@ def remove_odd_blocks(word: str, block_length: int) -> str:
         remove_odd_blocks('abcdefghijklm', 3), returns:
         'abcghim'
     """
-    block_length = abs(block_length)
-
     blocks = []
     for letter_index in range(0, len(word), block_length):  # creates blocks of the given length from the given string
         blocks.append(word[letter_index:letter_index+block_length])
@@ -260,6 +257,7 @@ def get_reversed_text(text: str) -> str:
         reversed_text += text[index_char]
     return reversed_text
 
+
 # ------------------------------------------- main code -------------------------------------------
 
 ALPHABET = generate_letters()
@@ -269,4 +267,12 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(f"abcdefghijklm -> {reduce_to_fixed('abcdefghijklm', 6)}")
+    print(f"shift_characters('abby', 5) -> fggd: {shift_characters('abby', 5)}")
+    print(f"pad_up_to('abb', 5, 11) -> abbfggkllpq: {pad_up_to('abb', 5, 11)}")
+    print(f"abc_mirror('abcd') -> zyxw: {abc_mirror('abcd')}")        
+    print(f"create_matrix('mamas', 'papas') -> ['bpbph', 'mamas', 'bpbph', 'mamas', 'esesk']: {create_matrix('mamas', 'papas')}")
+    print(f"zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl']) -> adgjkhebcfil: {zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl'])}")
+    print(f"rotate_right('abcdefgh', 3) -> fghabcde: {rotate_right('abcdefgh', 3)}")
+    print(f"get_square_index_chars('abcdefghijklm') -> abej: {get_square_index_chars('abcdefghijklm')}")
+    print(f"remove_odd_blocks('abcdefghijklm', 3) -> abcghim: {remove_odd_blocks('abcdefghijklm', 3)}")
+    print(f"reduce_to_fixed('abcdefghijklm', 6) -> bafedc: {reduce_to_fixed('abcdefghijklm', 6)}")
