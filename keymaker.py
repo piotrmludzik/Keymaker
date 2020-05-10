@@ -84,7 +84,7 @@ def create_matrix(word1, word2):
     Returns a list of strings where the nth row is word1 shifted by the value of the nth character
     of word2.
 
-        create_matrix('mamas', 'papas')
+        create_matrix('mamas', 'papas'), returns:
         ['bpbph', 'mamas', 'bpbph', 'mamas', 'esesk']
     """
     matrix = []
@@ -98,10 +98,45 @@ def create_matrix(word1, word2):
 
 def zig_zag_concatenate(matrix):
     """
-    >>> zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl'])
-    ... 'adgjkhebcfil'
+    Returns a single string containing all the characters of the "matrix" like this:
+
+           0  1  2
+        0  V  /--\\
+        1  |  |  |
+        1  |  |  |
+        1  \\--/  V
+
+        zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl']), returns:
+        'adgjkhebcfil'
     """
-    pass
+    matrix_length, word_length = len(matrix), len(matrix[0])
+    letters_number = matrix_length * word_length
+
+    from_left = True
+    hashed_word = ""
+    word_index, letter_index = 0, 0
+
+    while len(hashed_word) != letters_number:
+        # firs word
+        if word_index == 0 and hashed_word != "":
+            hashed_word += matrix[word_index][letter_index:letter_index+2]  # reads the next two letters
+            from_left = True
+            word_index += 1
+            letter_index += 1
+
+        # last word
+        elif word_index == matrix_length - 1:
+            hashed_word += matrix[word_index][letter_index:letter_index+2]  # reads the next two letters
+            from_left = False
+            word_index -= 1
+            letter_index += 1
+
+        # middle words
+        else:
+            hashed_word += matrix[word_index][letter_index]
+            word_index += 1 if from_left else -1
+
+    return hashed_word
 
 
 def rotate_right(word, n):
@@ -174,4 +209,4 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(create_matrix('mamas', 'papas'))
+    print(zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl']))
