@@ -179,7 +179,7 @@ def remove_odd_blocks(word: str, block_length: int) -> str:
     block_length = abs(block_length)
 
     blocks = []
-    for letter_index in range(0, len(word), block_length):
+    for letter_index in range(0, len(word), block_length):  # creates blocks of the given length from the given string
         blocks.append(word[letter_index:letter_index+block_length])
 
     processed_block = []
@@ -189,12 +189,19 @@ def remove_odd_blocks(word: str, block_length: int) -> str:
     return "".join(processed_block)
 
 
-def reduce_to_fixed(word, n):
+def reduce_to_fixed(word: str, number: int) -> str:
     """
-    >>> reduce_to_fixed('abcdefghijklm', 6)
-    ... 'bafedc'
+    Function reduce_to_fixed(word, n) which cuts the first n characters of the input, and performs
+    a left rotation of n//3 and returns the result read backwards.
+
+        reduce_to_fixed('abcdefghijklm', 6), returns:
+        'bafedc'
     """
-    pass
+    word = word[:number]  # cuts the first number characters
+    word = rotate_letters(word, number // 3, False)  # left rotation
+    word = get_reversed_text(word)
+
+    return word
 
 
 def hash_it(word):
@@ -246,6 +253,13 @@ def rotate_letters(word: str, letters_number: int, rotate_right: bool = True) ->
     return word
 
 
+def get_reversed_text(text: str) -> str:
+    """gets reversed text"""
+    reversed_text = ""
+    for index_char in range(len(text)-1, -1, -1):  # iterate reducing letters one by one
+        reversed_text += text[index_char]
+    return reversed_text
+
 # ------------------------------------------- main code -------------------------------------------
 
 ALPHABET = generate_letters()
@@ -255,4 +269,4 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(remove_odd_blocks("abcdefghijklm", -3))
+    print(f"abcdefghijklm -> {reduce_to_fixed('abcdefghijklm', 6)}")
