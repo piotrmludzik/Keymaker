@@ -150,12 +150,22 @@ def rotate_right(word: str, letters_number: int) -> str:
     return rotate_letters(word, letters_number)
 
 
-def get_square_index_chars(word):
+def get_square_index_chars(word: str) -> str:
     """
-    >>> get_square_index_chars('abcdefghijklm')
-    ... 'abej'
+    Returns all characters of word laying at square number indices.
+
+        get_square_index_chars('abcdefghijklm'), returns:
+        'abej'
     """
-    pass
+    returned_string = ""
+    letter_index, square_number = 0, 0
+
+    while square_number <= len(word):
+        returned_string += word[square_number]
+        letter_index += 1
+        square_number = letter_index * letter_index
+
+    return returned_string
 
 
 def remove_odd_blocks(word, block_length):
@@ -206,10 +216,14 @@ def generate_letters() -> tuple:
 def rotate_letters(word: str, letters_number: int, rotate_right: bool = True) -> str:
     """
     Returns a string of the same length as word, only the characters are rotated by n positions
-    in the indicated page (default to the right). The character "falling out" on the right side come back from the left side.
+    in the indicated page (default to the right). The character "falling out" on the right side
+    come back from the left side and conversely.
 
-        rotate_right('abcdefgh', 3), returns:
+        rotate_letters('abcdefgh', 3, True), returns:
         'fghabcde'
+
+        rotate_letters('abcdefgh', 3, False), returns:
+        'defghabc'
     """
     if rotate_right:
         word = word[len(word) - letters_number:] + word[:len(word) - letters_number]
@@ -228,4 +242,4 @@ if __name__ == '__main__':
     # name = input("Enter your name! ").lower()
     # print(f'Your key: {hash_it(name)}')
 
-    print(rotate_right("abcdefgh", 3))
+    print(get_square_index_chars("abcdefghijklm"))
