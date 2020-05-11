@@ -44,12 +44,11 @@ def pad_up_to(word: str, shift: int, letters_number: int) -> str:
         pad_up_to('abb', 5, 11), returns:
     ... 'abbfggkllpq'
     """
-    iterate_number = round(letters_number / len(word))
-
-    # operates on the whole word
     returned_string = ""
-    for iterate_block in range(iterate_number):
-        returned_string += shift_characters(word, iterate_block * shift)
+    loop_number = 0
+    for loop in range(0, letters_number, len(word)):
+        returned_string += shift_characters(word, loop_number * shift)
+        loop_number += 1
 
     return returned_string[:letters_number]
 
@@ -264,15 +263,15 @@ ALPHABET = generate_letters()
 ALPHABET_SIZE = len(ALPHABET)
 
 if __name__ == '__main__':
-    # name = input("Enter your name! ").lower()
-    # print(f'Your key: {hash_it(name)}')
+    name = input("Enter your name! ").lower()
+    print(f'Your key: {hash_it(name)}')
 
-    print(f"shift_characters('abby', 5) -> fggd: {shift_characters('abby', 5)}")
-    print(f"pad_up_to('abb', 5, 11) -> abbfggkllpq: {pad_up_to('abb', 5, 11)}")
-    print(f"abc_mirror('abcd') -> zyxw: {abc_mirror('abcd')}")        
-    print(f"create_matrix('mamas', 'papas') -> ['bpbph', 'mamas', 'bpbph', 'mamas', 'esesk']: {create_matrix('mamas', 'papas')}")
-    print(f"zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl']) -> adgjkhebcfil: {zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl'])}")
-    print(f"rotate_right('abcdefgh', 3) -> fghabcde: {rotate_right('abcdefgh', 3)}")
-    print(f"get_square_index_chars('abcdefghijklm') -> abej: {get_square_index_chars('abcdefghijklm')}")
-    print(f"remove_odd_blocks('abcdefghijklm', 3) -> abcghim: {remove_odd_blocks('abcdefghijklm', 3)}")
-    print(f"reduce_to_fixed('abcdefghijklm', 6) -> bafedc: {reduce_to_fixed('abcdefghijklm', 6)}")
+    # print(f"shift_characters('abby', -5) -> fggd: {shift_characters('abby', 5)}")
+    # print(f"pad_up_to('abb', 5, 11) -> abbfggkllpq: {pad_up_to('abb', 5, 11)}")
+    # print(f"abc_mirror('abcd') -> zyxw: {abc_mirror('abcd')}")        
+    # print(f"create_matrix('mamas', 'papas') -> ['bpbph', 'mamas', 'bpbph', 'mamas', 'esesk']: {create_matrix('mamas', 'papas')}")
+    # print(f"zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl']) -> adgjkhebcfil: {zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl'])}")
+    # print(f"rotate_right('abcdefgh', 3) -> fghabcde: {rotate_right('abcdefgh', 3)}")
+    # print(f"get_square_index_chars('abcdefghijklm') -> abej: {get_square_index_chars('abcdefghijklm')}")
+    # print(f"remove_odd_blocks('abcdefghijklm', 3) -> abcghim: {remove_odd_blocks('abcdefghijklm', 3)}")
+    # print(f"reduce_to_fixed('abcdefghijklm', 6) -> bafedc: {reduce_to_fixed('abcdefghijklm', 6)}")
