@@ -42,7 +42,7 @@ def pad_up_to(word: str, shift: int, letters_number: int) -> str:
     shifted variants of it as described above.
 
         pad_up_to('abb', 5, 11), returns:
-    ... 'abbfggkllpq'
+        'abbfggkllpq'
     """
     returned_string = ""
     loop_number = 0
@@ -268,7 +268,7 @@ if __name__ == '__main__':
 
     # print(f"shift_characters('abby', -5) -> fggd: {shift_characters('abby', 5)}")
     # print(f"pad_up_to('abb', 5, 11) -> abbfggkllpq: {pad_up_to('abb', 5, 11)}")
-    # print(f"abc_mirror('abcd') -> zyxw: {abc_mirror('abcd')}")        
+    # print(f"abc_mirror('abcd') -> zyxw: {abc_mirror('abcd')}")
     # print(f"create_matrix('mamas', 'papas') -> ['bpbph', 'mamas', 'bpbph', 'mamas', 'esesk']: {create_matrix('mamas', 'papas')}")
     # print(f"zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl']) -> adgjkhebcfil: {zig_zag_concatenate(['abc', 'def', 'ghi', 'jkl'])}")
     # print(f"rotate_right('abcdefgh', 3) -> fghabcde: {rotate_right('abcdefgh', 3)}")
